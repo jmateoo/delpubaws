@@ -1,17 +1,12 @@
 from flask import Flask, request, jsonify, make_response
 import requests, json, os, boto3
-from google.cloud import pubsub_v1
 
 
 app = Flask(__name__)
 
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "static-anchor-396016-7119790dab73.json"
-# project_id = 'static-anchor-396016'  
-# topic_name = 'deleterecord'  
-# publisher = pubsub_v1.PublisherClient()
-# topic_path = publisher.topic_path(project_id, topic_name)
-sqs = boto3.client('sqs', region_name='us-east-1')  # Cambia la región según tu ubicación.
-queue_url = 'https://sqs.us-east-1.amazonaws.com/019856031236/traslateoperator'  # Reemplaza con la URL de tu cola SQS.
+
+sqs = boto3.client('sqs', region_name='us-east-1')  
+queue_url = 'https://sqs.us-east-1.amazonaws.com/019856031236/traslateoperator' 
 
 @app.route('/v1/trasladar_ciudadano', methods=['DELETE'])
 def delete_record():
